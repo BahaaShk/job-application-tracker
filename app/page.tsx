@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,10 +17,29 @@ export default function Home() {
               Capture, organize, and manage your job search in one place.
             </p>
             <div className=" flex flex-col items-center gap-4">
-              <Button size={'lg'} className={' h-12 px-8 text-lg font-medium cursor-pointer'}>Start for free 
+              <Link href={'/sign-up'}>
+              <Button size={'lg'} className={' h-12 px-8 text-lg font-medium'}>Start for free 
                 <ArrowRight className="ml-2" />
               </Button>
+              </Link>
               <p className=" text-sm text-muted-foreground">Free forever, No credit card required</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Hero Images Section with Tabs */}
+        <section className=" border-t bg-white py-16">
+          <div>
+            <div>
+              {/* Tabs */}
+              <div>
+                <Button>Organize Application</Button>
+                <Button>Get Hired</Button>
+                <Button>Manage Boards</Button>
+              </div>
+              <div>
+                
+              </div>
             </div>
           </div>
         </section>
