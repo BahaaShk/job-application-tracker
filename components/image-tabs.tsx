@@ -44,7 +44,7 @@ export default function ImageTabs() {
               Manage Boards
             </Button>
           </div>
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border border-gray-200 shadow-2xl">
+          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border border-gray-400 shadow-2xl">
             {activeTab === "organize" && (
               <Image
                 src="/hero-images/hero1.png"
