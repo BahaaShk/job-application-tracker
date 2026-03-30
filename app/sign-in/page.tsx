@@ -11,32 +11,51 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { signIn } from "@/lib/auth/auth-client";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 
 export default function SignIn(){
-  const [name, setName] = useState("");
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-  
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
   
     const router = useRouter();
   
-    async function handleSubmit(e: React.FormEvent) {}
-  
+      async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        setError("")
+        setLoading(true)
+    
+        try {
+          const result = await signIn.email({
+            email,
+            password
+          })
+    
+          if(result.error){
+    setError(result.error.message ?? "Failed to sign In")
+          } else {
+            router.push('/dashboard')
+          }
+     
+        } catch (err) {
+          setError("Unexpected error occured")
+        } finally{
+          setLoading(false)
+        }
+      }
+
     return (
       <div className="flex min-h-[calc(100vh-4.5rem)] items-center justify-center bg-white p-4">
     <Card className="w-full max-w-md border-gray-200 shadow-lg">
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold text-black">
+            <CardTitle className="text-center text-2xl font-bold text-black">
               Sign In
             </CardTitle>
-            <CardDescription className="text-gray-600">
-              Please login to start tracking your job applications
-            </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <CardContent className="space-y-4">
@@ -80,10 +99,10 @@ export default function SignIn(){
                 className="w-full bg-primary hover:bg-primary/90"
                 disabled={loading}
               >
-                {loading ? "Creating account..." : "Sign In"}
+                {loading ? "Signing In..." : "Sign In"}
               </Button>
               <p className="text-center text-sm text-gray-600">
-                Don&apos;t have an account yet?{" "}
+                Don&apos;t have an account yet? {""}
                 <Link
                   href="/sign-up"
                   className="font-medium text-primary hover:underline"

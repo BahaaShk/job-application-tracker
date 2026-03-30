@@ -56,12 +56,9 @@ setError(result.error.message ?? "Failed to sign up")
     <div className="flex min-h-[calc(100vh-4.5rem)] items-center justify-center bg-white p-4">
   <Card className="w-full max-w-md border-gray-200 shadow-lg">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-black">
+          <CardTitle className=" text-center text-2xl font-bold text-black">
             Sign Up
           </CardTitle>
-          <CardDescription className="text-gray-600">
-            Create an account to start tracking your job applications
-          </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <CardContent className="space-y-4">
@@ -122,7 +119,7 @@ setError(result.error.message ?? "Failed to sign up")
               {loading ? "Creating account..." : "Sign Up"}
             </Button>
             <p className="text-center text-sm text-gray-600">
-              Already have an account?{" "}
+              Already have an account? {""}
               <Link
                 href="/sign-in"
                 className="font-medium text-primary hover:underline"

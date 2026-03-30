@@ -1,31 +1,44 @@
 import { Briefcase } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { getSession } from "@/lib/auth/auth";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await getSession();
   return (
     <nav className=" border-b border-gray-200 bg-white ">
       <div className=" container mx-auto flex h-16 items-center px-4 justify-between">
-        <Link href={'/'} className=" flex items-center gap-2 text-xl font-semibold text-primary">
-        <Briefcase />
-        Job Tracker
+        <Link
+          href={"/"}
+          className=" flex items-center gap-2 text-xl font-semibold text-primary"
+        >
+          <Briefcase />
+          Job Tracker
         </Link>
         <div>
-                        <Link href="/sign-in">
-                <Button
-                  variant="ghost"
-                  className="text-gray-700 hover:text-black"
-                >
-                  Login
-                </Button>
-              </Link>
-              <Link href="/sign-up">
-                <Button className="bg-primary hover:bg-primary/80">
-                  Start for free
-                </Button>
-              </Link>
+          {
+session?.user ? (<>
+<Link href={'/dashboard'}>
+<Button variant={'ghost'} className={'text-gray-700 hover:text-black'}>
+  Dashboard
+</Button>
+</Link>
+</>) : (
+            <>
+          <Link href="/sign-in">
+            <Button variant="ghost" className="text-gray-700 hover:text-black">
+              Login
+            </Button>
+          </Link>
+          <Link href="/sign-up">
+            <Button className="bg-primary hover:bg-primary/80">
+              Start for free
+            </Button>
+          </Link>
+          </>
+          )}
         </div>
       </div>
     </nav>
-  )
+  );
 }
